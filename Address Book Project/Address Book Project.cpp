@@ -4,5 +4,5 @@
 
 int main()
 {
-    std::cout << "Address Book Project!\n";
+    std::cout << "Address Book Project\n";
 }
