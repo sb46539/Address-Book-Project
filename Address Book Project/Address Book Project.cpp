@@ -1,11 +1,13 @@
 #include <iostream>
-#include "personType.h"
+#include "extPersonType.h"
 
-void print();
+using namespace std;
 
 int main()
 {
-	personType person;
-	person.print();
-	return 0;
+    cout << "Testing constructor with parameters ... " << endl;
+    extPersonType person("George", "Smith");
+    person.print();
+    cout << endl;
+
 }
