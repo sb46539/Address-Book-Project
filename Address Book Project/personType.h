@@ -1,32 +1,32 @@
 #pragma once
 #include <string>
 #include <iostream>
-class personType // Declares class
+class personType
 {
 private:
-	std::string firstName; // Declares string variable firstName
-	std::string lastName; // Declares string variable lastName
+	std::string firstName;
+	std::string lastName;
 
 public:
 	// Setters
-	void setFirstName(std::string fName) { // Initializes the member variable firstName to the identifier fName (for clarity between member variable vs. input value)
+	personType(std::string firstName, std::string lastName, std::string addr, std::string city, std::string state, int zip);
+
+	void setFirstName(std::string fName) { 
 		firstName = fName;
 	}
-	void setLastName(std::string lName) { // Initializes the member variable lastName to the identifier lName (for clarity between member variable vs. input value)
+	void setLastName(std::string lName) {
 		lastName = lName;
 	}
 
 	// Getters
-	std::string getFirstName() { // This function, meanwhile, returns the value of the member variable firstName.
+	std::string getFirstName() {
 		return firstName;
 	}
-	std::string getLastName() { // This function also returns the value of the member function, but for lastName
+	std::string getLastName() {
 		return lastName;
 	}
-	void print(); // Displays the objects data
-	personType(std::string fName = "", std::string lName = ""); // This is a constructor that takes parameters fName and lName (sets initial values or properties of object when created)
-
-
+	void print(); 
+	personType(std::string fName = "", std::string lName = "");
 
 };
 

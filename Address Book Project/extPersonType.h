@@ -1,12 +1,24 @@
 #pragma once
 #include "personType.h"
+#include "dateType.h"
 class extPersonType : public personType {
 private:
     std::string phoneNumber;
     std::string relationship;
-   int birthMonth;
+    int birthMonth;
+    dateType birthdate;
+    addressType address;
+
+
 public:
-    // Setters
+
+    // CONSTRUCTOR
+    extPersonType(std::string getFirstName, std::string getLastName, int month = 1, int day = 1, int year = 1900, std::string addr = "", std::string city = "", std::string state = "", int zip = 0,
+        std::string pNumber = "", std::string rShip = "Friend");
+    extPersonType()
+        : personType("", ""), phoneNumber(""), relationship("Friend"), birthMonth(1), birthdate(1, 1, 1900) {}
+
+    // SETTERS
     void setPhoneNumber(std::string pNumber) {
         phoneNumber = pNumber;
     }
@@ -14,7 +26,7 @@ public:
         relationship = rShip;
     }
    
-    // Getters
+    // GETTERS
     std::string getPhoneNumber() {
         return phoneNumber;
     }
@@ -22,8 +34,10 @@ public:
         return relationship;
     }
 
+    int getBirthMonth() {
+        return birthdate.getMonth();
+    }
+
     void print();
-    extPersonType(std::string getFirstName, std::string getLastName);
 };
 
-// birthdate.getMonth(dMonth), birthdate.getMonth(dDay), birthdate.getMonth(dYear)
