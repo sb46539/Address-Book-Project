@@ -19,7 +19,7 @@ int main()
 	address.setZipcode(55555555);
 	address.print();
 	cout << endl;
-	cout << "Testing valid address ..." << endl;
+	cout << "Testing valid address .." << endl;
 	address.setAddress("44 East Main Street");
 	address.setCity("Hampton");
 	address.setState("VA");
