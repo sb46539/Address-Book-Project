@@ -128,11 +128,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Address Book Project.cpp" />
+    <ClCompile Include="addressBookType.cpp" />
     <ClCompile Include="addressType.cpp" />
     <ClCompile Include="dateType.cpp" />
     <ClCompile Include="extDateType.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="addressBookType.h" />
     <ClInclude Include="addressType.h" />
     <ClInclude Include="dateType.h" />
     <ClInclude Include="extDateType.h" />
