@@ -4,8 +4,8 @@
 #include <string>
 
 
-addressBookType::addressBookType(int maxSize) {
-    this->maxSize = maxSize;
+addressBookType::addressBookType(int size) {
+    maxSize = size;
     length = 0;
 }
 
