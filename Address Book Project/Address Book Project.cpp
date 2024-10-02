@@ -1,27 +1,26 @@
 #include <iostream>
-#include "extPersonType.h"
+#include "addressBookType.h"
+//testing for addressBookType
+int main() {
+    addressBookType myAddressBook(500);
+    myAddressBook.initEntry();
 
-using namespace std;
+    std::string testLastName = "Smith";
+    int testMonth = 3;
+    std::string testRelationship = "Friend";
 
-int main()
-{
-    cout << "Testing default constructor ... " << endl;
-    extPersonType defPerson;
-    defPerson.print();
-    cout << endl;
 
-    cout << "Testing constructor with parameters ... " << endl;
-    extPersonType person("George", "Smith", 4, 30, 1994, "145 South Street, Apt. 5", "Hampton", "VA", 23554, "757-444-5555", "Friend");
-    person.print();
-    cout << endl;
+    std::cout << "Last Name: " << testLastName << std::endl;
+    myAddressBook.findPerson(testLastName);
 
-    cout << "Testing invalid relationship (Spouse) ... " << endl;
-    person.setRelationship("Spouse");
-    person.print();
-    cout << endl;
+    std::cout << "Birthdays by Month: " << testMonth << std::endl;
+    myAddressBook.findBirthdays(testMonth);
 
-    cout << "Testing valid relationship (Business) ... " << endl;
-    person.setRelationship("Business");
-    person.print();
-    cout << endl;
+    std::cout << "Relations: " << testRelationship << std::endl;
+    myAddressBook.findRelations(testRelationship);
+
+    std::cout << "All:" << std::endl;
+    myAddressBook.print();
+
+    return 0;
 }
