@@ -1,27 +1,54 @@
-// IMPLEMENTATION FILE
-
 #include "extPersonType.h"
-#include "personType.h"
 #include <iostream>
 
-// Constructor
-extPersonType::extPersonType(std::string getFirstName, std::string getLastName, int month, int day, int year,
-    std::string addr, std::string city, std::string state, int zip,
-    std::string pNumber, std::string rShip)
-    : personType(getFirstName, getLastName),
-    phoneNumber(pNumber),
-    relationship(rShip),
-    birthMonth(month),
-    birthdate(day, month, year),
-    address(addr, city, state, zip)
-{ }
+extPersonType::extPersonType(const std::string& firstName, const std::string& lastName,
+    int month, int day, int year,
+    const std::string& addr, const std::string& city,
+    const std::string& state, int zip,
+    const std::string& pNumber, const std::string& rShip)
+    : firstName(firstName), lastName(lastName), phoneNumber(pNumber),
+    relationship(rShip), birthMonth(month) {
 
-void extPersonType::print() {
-    std::cout << "First name: " << getFirstName()
-        << ", Last name: " << getLastName()
+}
+
+bool extPersonType::operator==(const extPersonType& other) const {
+    std::string key1 = lastName + " " + firstName;
+    std::string key2 = other.lastName + " " + other.firstName;
+    return key1 == key2;
+}
+
+bool extPersonType::operator!=(const extPersonType& other) const {
+    return !(*this == other);
+}
+
+bool extPersonType::operator>=(const extPersonType& other) const {
+    std::string key1 = lastName + " " + firstName;
+    std::string key2 = other.lastName + " " + other.firstName;
+    return key1 >= key2;
+}
+
+std::string extPersonType::getFirstName() const {
+    return firstName;
+}
+
+std::string extPersonType::getLastName() const {
+    return lastName;
+}
+
+std::string extPersonType::getRelationship() const {
+    return relationship;
+}
+
+int extPersonType::getBirthMonth() const {
+    return birthMonth;
+}
+
+void extPersonType::print() const {
+    std::cout << "First name: " << firstName
+        << ", Last name: " << lastName
         << ", Month: " << birthMonth
-        << ", Day: " << birthdate.getDay()
-        << ", Year: " << birthdate.getYear()
-        << ", ";
-    address.print();
+        << ", Phone Number: " << phoneNumber
+        << ", Relationship: " << relationship << std::endl;
+
+
 }
