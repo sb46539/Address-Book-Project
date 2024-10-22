@@ -15,7 +15,7 @@ public:
     void setDate(int month, int day, int year);
 
     int getDay() const;
-    int getMonth() const;
+    int getMonth() const;//e
     int getYear() const;
 
     int getDaysInMonth(int month, int year) const {
