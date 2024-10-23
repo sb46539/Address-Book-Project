@@ -1,16 +1,17 @@
 #include "addressBookType.h"
-#include <iostream>
 #include <fstream>
+#include <iostream>
 #include <string>
 
 
-addressBookType::addressBookType(int size) {
-    maxSize = size;
-    length = 0;
-}
+addressBookType::addressBookType() : orderedLinkedList<extPersonType>() {}
 
 void addressBookType::initEntry() {
     std::ifstream inFile("AddressBookData.txt");
+    if (!inFile) {
+        std::cerr << "Error opening file." << std::endl;
+        return;
+    }
 
     std::string firstName, lastName, address, city, state, phoneNumber, relationship;
     int month, day, year, zip;
@@ -18,12 +19,10 @@ void addressBookType::initEntry() {
     while (inFile >> firstName >> lastName) {
         inFile >> month >> day >> year;
         inFile.ignore();
-
         std::getline(inFile, address);
         std::getline(inFile, city);
         inFile >> state >> zip;
         inFile.ignore();
-
         std::getline(inFile, phoneNumber);
         std::getline(inFile, relationship);
 
@@ -34,64 +33,59 @@ void addressBookType::initEntry() {
     inFile.close();
 }
 
-void addressBookType::addEntry(extPersonType newEntry) {
-    if (length < maxSize) {
-        addressList[length] = newEntry;
-        length++;
-    }
+void addressBookType::addEntry(const extPersonType& newEntry) {
+    insert(newEntry);
 }
 
-void addressBookType::findPerson(std::string lastName) {
-    for (int i = 0; i < length; i++) {
-        if (addressList[i].getLastName() == lastName) {
-            addressList[i].print();
+void addressBookType::findPerson(const std::string& lastName, const std::string& firstName) {
+    nodeType<extPersonType>* current = first;
+    while (current != nullptr) {
+        if (current->info.getLastName() == lastName && current->info.getFirstName() == firstName) {
+            current->info.print();
             return;
         }
+        current = current->link;
     }
-    std::cout << "Not found." << std::endl;
+    std::cout << "Not found.\n";
 }
+
 
 void addressBookType::findBirthdays(int month) {
+    nodeType<extPersonType>* current = first;
     bool found = false;
-    for (int i = 0; i < length; i++) {
-        if (addressList[i].getBirthMonth() == month) {
-            addressList[i].print();
+    while (current != nullptr) {
+        if (current->info.getBirthMonth() == month) {
+            current->info.print();
             found = true;
         }
+        current = current->link;
     }
     if (!found) {
-        std::cout << "No birthdays!" << std::endl;
+        std::cout << "No birthdays found!\n";
     }
 }
 
-void addressBookType::findRelations(std::string relationship) {
+
+void addressBookType::findRelations(const std::string& relationship) {
+    nodeType<extPersonType>* current = first;
     bool found = false;
-    for (int i = 0; i < length; i++) {
-        if (addressList[i].getRelationship() == relationship) {
-            addressList[i].print();
+    while (current != nullptr) {
+        if (current->info.getRelationship() == relationship) {
+            current->info.print();
             found = true;
         }
+        current = current->link;
     }
     if (!found) {
-        std::cout << "No entries found." << std::endl;
+        std::cout << "No entries found.\n";
     }
 }
 
-void addressBookType::sortEntries() {
-    for (int current = 1; current < length; current++) {
-        int index = current;
-        extPersonType temp = addressList[index];
-
-        while (index > 0 && addressList[index - 1].getLastName() > temp.getLastName()) {
-            addressList[index] = addressList[index - 1];
-            index--;
-        }
-        addressList[index] = temp;
-    }
-}
 
 void addressBookType::print() {
-    for (int i = 0; i < length; i++) {
-        addressList[i].print();
+    nodeType<extPersonType>* current = first;
+    while (current != nullptr) {
+        current->info.print();
+        current = current->link;
     }
 }

@@ -25,4 +25,3 @@ public:
 
     void print() const;
 };
-
