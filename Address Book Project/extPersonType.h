@@ -26,7 +26,7 @@ public:
         relationship = rShip;
     }
 
-    // GETTERS
+    // GETTER
     std::string getPhoneNumber() {
         return phoneNumber;
     }
