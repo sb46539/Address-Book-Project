@@ -1,16 +1,20 @@
 #pragma once
-#include <string>
-#include "orderedLinkedList.h"
 #include "extPersonType.h"
 
-class addressBookType : public orderedLinkedList<extPersonType> {
+class addressBookType {
+private:
+    extPersonType addressList[500];
+    int length;
+    int maxSize;
+
 public:
-    addressBookType();
+    addressBookType(int maxSize = 500);
 
     void initEntry();
-    void addEntry(const extPersonType& newEntry);
-    void findPerson(const std::string& lastName, const std::string& firstName);
+    void addEntry(extPersonType newEntry);
+    void findPerson(std::string lastName);
     void findBirthdays(int month);
-    void findRelations(const std::string& relationship);
+    void findRelations(std::string relationship);
+    void sortEntries();
     void print();
 };

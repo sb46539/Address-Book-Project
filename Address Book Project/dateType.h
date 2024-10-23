@@ -21,7 +21,7 @@ public:
 
 
     int getDaysInMonth(int month, int year) const;
-    bool isLeapYear (int year) const;
+    bool isLeapYear(int year) const;
 
     void print() const;
 };

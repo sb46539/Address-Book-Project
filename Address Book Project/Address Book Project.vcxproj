@@ -136,8 +136,6 @@
     <ClCompile Include="personType.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\..\Downloads\linkedList.h" />
-    <ClInclude Include="..\..\..\..\Downloads\orderedLinkedList.h" />
     <ClInclude Include="addressBookType.h" />
     <ClInclude Include="addressType.h" />
     <ClInclude Include="dateType.h" />

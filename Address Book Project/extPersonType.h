@@ -1,36 +1,43 @@
 #pragma once
-
-
-#include <string>
-
-class extPersonType {
-public:
-
-    extPersonType(const std::string& firstName = "", const std::string& lastName = "",
-        int month = 0, int day = 0, int year = 0,
-        const std::string& addr = "", const std::string& city = "",
-        const std::string& state = "", int zip = 0,
-        const std::string& pNumber = "", const std::string& rShip = "");
-
-
-    bool operator==(const extPersonType& other) const;
-    bool operator!=(const extPersonType& other) const;
-    bool operator>=(const extPersonType& other) const;
-
-
-    std::string getFirstName() const;
-    std::string getLastName() const;
-    std::string getRelationship() const;
-    int getBirthMonth() const;
-
-
-    void print() const;
-
+#include "personType.h"
+#include "dateType.h"
+class extPersonType : public personType {
 private:
-    std::string firstName;
-    std::string lastName;
     std::string phoneNumber;
     std::string relationship;
     int birthMonth;
+    dateType birthdate;
+    addressType address;
 
+
+public:
+
+    // CONSTRUCTOR
+    extPersonType(std::string getFirstName, std::string getLastName, int month = 1, int day = 1, int year = 1900, std::string addr = "", std::string city = "", std::string state = "", int zip = 0,
+        std::string pNumber = "", std::string rShip = "Friend");
+    extPersonType()
+        : personType("", ""), phoneNumber(""), relationship("Friend"), birthMonth(1), birthdate(1, 1, 1900) {}
+
+    // SETTERS
+    void setPhoneNumber(std::string pNumber) {
+        phoneNumber = pNumber;
+    }
+    void setRelationship(std::string rShip) {
+        relationship = rShip;
+    }
+
+    // GETTERS
+    std::string getPhoneNumber() {
+        return phoneNumber;
+    }
+    std::string getRelationship() {
+        return relationship;
+    }
+
+    int getBirthMonth() {
+        return birthdate.getMonth();
+    }
+
+    void print();
 };
+

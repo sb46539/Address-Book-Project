@@ -11,7 +11,7 @@ public:
 	// Setters
 	personType(std::string firstName, std::string lastName, std::string addr, std::string city, std::string state, int zip);
 
-	void setFirstName(std::string fName) { 
+	void setFirstName(std::string fName) {
 		firstName = fName;
 	}
 	void setLastName(std::string lName) {
@@ -25,7 +25,7 @@ public:
 	std::string getLastName() {
 		return lastName;
 	}
-	void print(); 
+	void print();
 	personType(std::string fName = "", std::string lName = "");
 
 };
