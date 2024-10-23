@@ -1,91 +1,70 @@
 #include "addressBookType.h"
-#include <fstream>
 #include <iostream>
-#include <string>
+#include <fstream>
 
 
-addressBookType::addressBookType() : orderedLinkedList<extPersonType>() {}
+addressBookType::addressBookType() {
 
-void addressBookType::initEntry() {
-    std::ifstream inFile("AddressBookData.txt");
-    if (!inFile) {
-        std::cerr << "Error opening file." << std::endl;
-        return;
-    }
+}
 
+
+void addressBookType::addEntry() {
     std::string firstName, lastName, address, city, state, phoneNumber, relationship;
     int month, day, year, zip;
 
-    while (inFile >> firstName >> lastName) {
-        inFile >> month >> day >> year;
-        inFile.ignore();
-        std::getline(inFile, address);
-        std::getline(inFile, city);
-        inFile >> state >> zip;
-        inFile.ignore();
-        std::getline(inFile, phoneNumber);
-        std::getline(inFile, relationship);
+    std::cout << "Enter firstname: ";
+    std::cin >> firstName;
+    std::cout << "Enter lastname: ";
+    std::cin >> lastName;
+    std::cout << "Enter birth month: ";
+    std::cin >> month;
+    std::cout << "Enter birth day: ";
+    std::cin >> day;
+    std::cout << "Enter birth year: ";
+    std::cin >> year;
+    std::cout << "Enter address: ";
+    std::cin.ignore();
+    std::getline(std::cin, address);
+    std::cout << "Enter city: ";
+    std::getline(std::cin, city);
+    std::cout << "Enter state: ";
+    std::getline(std::cin, state);
+    std::cout << "Enter zip code: ";
+    std::cin >> zip;
+    std::cout << "Enter phone number: ";
+    std::cin >> phoneNumber;
+    std::cout << "Enter relationship: ";
+    std::cin >> relationship;
 
-        extPersonType newEntry(firstName, lastName, month, day, year, address, city, state, zip, phoneNumber, relationship);
-        addEntry(newEntry);
-    }
 
-    inFile.close();
-}
-
-void addressBookType::addEntry(const extPersonType& newEntry) {
-    insert(newEntry);
-}
-
-void addressBookType::findPerson(const std::string& lastName, const std::string& firstName) {
-    nodeType<extPersonType>* current = first;
-    while (current != nullptr) {
-        if (current->info.getLastName() == lastName && current->info.getFirstName() == firstName) {
-            current->info.print();
-            return;
-        }
-        current = current->link;
-    }
-    std::cout << "Not found.\n";
+    extPersonType newEntry(firstName, lastName, month, day, year, address, city, state, zip, phoneNumber, relationship);
+    entryList.insert(newEntry);
 }
 
 
-void addressBookType::findBirthdays(int month) {
-    nodeType<extPersonType>* current = first;
-    bool found = false;
-    while (current != nullptr) {
-        if (current->info.getBirthMonth() == month) {
-            current->info.print();
-            found = true;
-        }
-        current = current->link;
-    }
-    if (!found) {
-        std::cout << "No birthdays found!\n";
-    }
+void addressBookType::deleteEntry(const std::string& firstName, const std::string& lastName) {
+    extPersonType entryToDelete(firstName, lastName);
+    entryList.deleteNode(entryToDelete);
 }
 
 
-void addressBookType::findRelations(const std::string& relationship) {
-    nodeType<extPersonType>* current = first;
-    bool found = false;
-    while (current != nullptr) {
-        if (current->info.getRelationship() == relationship) {
-            current->info.print();
-            found = true;
-        }
-        current = current->link;
+void addressBookType::saveEntries() {
+    std::ofstream outFile("AddressBookData.txt");
+    if (!outFile) {
+        std::cerr << "Error." << std::endl;
+        return;
     }
-    if (!found) {
-        std::cout << "No entries found.\n";
-    }
+
+    outFile.close();
+}
+
+
+void addressBookType::onExit() {
+    saveEntries();
 }
 
 
 void addressBookType::print() {
-    nodeType<extPersonType>* current = first;
-    while (current != nullptr) {
-        current->info.print();
-        current = current->link;
-    }
+    std::cout << "Printing all entries..." << std::endl;
+
 }

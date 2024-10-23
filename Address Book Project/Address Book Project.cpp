@@ -1,26 +1,34 @@
-#include <iostream>
 #include "addressBookType.h"
+#include <iostream>
 
 int main() {
-    addressBookType myAddressBook;
-    myAddressBook.initEntry();
+    addressBookType addressBook;
 
-    std::string testFirstName = "John";
-    std::string testLastName = "Smith";
-    int testMonth = 3;
-    std::string testRelationship = "Friend";
 
-    std::cout << "Searching for: " << testFirstName << " " << testLastName << std::endl;
-    myAddressBook.findPerson(testFirstName, testLastName);
+    char choice;
+    do {
+        std::cout << "Menu:\n1. Add entry\n2. Delete entry\n3. Print entries\n4. Quit\n";
+        std::cin >> choice;
 
-    std::cout << "Birthdays in Month: " << testMonth << std::endl;
-    myAddressBook.findBirthdays(testMonth);
+        switch (choice) {
+        case '1':
+            addressBook.addEntry();
+            break;
+        case '2': {
+            std::string firstName, lastName;
+            std::cout << "Enter firstname: ";
+            std::cin >> firstName;
+            std::cout << "Enter lastname: ";
+            std::cin >> lastName;
+            addressBook.deleteEntry(firstName, lastName);
+            break;
+        }
+        case '3':
+            addressBook.print();
+            break;
+        }
+    } while (choice != '4');
 
-    std::cout << "Relations: " << testRelationship << std::endl;
-    myAddressBook.findRelations(testRelationship);
-
-    std::cout << "All entries in the Address Book:" << std::endl;
-    myAddressBook.print();
-
+    addressBook.onExit();
     return 0;
 }

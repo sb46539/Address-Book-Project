@@ -1,5 +1,4 @@
 #include "extPersonType.h"
-#include <iostream>
 
 extPersonType::extPersonType(const std::string& firstName, const std::string& lastName,
     int month, int day, int year,
@@ -47,8 +46,6 @@ void extPersonType::print() const {
     std::cout << "First name: " << firstName
         << ", Last name: " << lastName
         << ", Month: " << birthMonth
-        << ", Phone Number: " << phoneNumber
+        << ", Phone number: " << phoneNumber
         << ", Relationship: " << relationship << std::endl;
-
-
 }
